@@ -50,6 +50,7 @@ public class flight extends HttpServlet {
 			String query="select * from flight where from1 = '"+from1+"' and to1='"+to1+"' and date1='"+date1+"'";
 			Statement st = con.createStatement();
 			ResultSet rs = st.executeQuery(query);
+			int i=1;
 			out.print("<table border='1px solid' cellpadding='10'>");
 			out.print("<th>Id</th> <th>From</th> <th>To</th> <th>Date</th> <th>Business Class Fare</th> <th>Economy Class Fare</th> <th>Time</th> <th>Seat Availability</th> <th>Book</th>");
 			while(rs.next())
@@ -59,7 +60,7 @@ public class flight extends HttpServlet {
 						{	
 							out.print("<tr>");					
 							out.println("<td>"+rs.getString(1)+"</td>"+"<td>"+rs.getString(2)+"</td>"+"<td>"+rs.getString(3)+"</td>"+"<td>"+rs.getString(4)+"</td>"+"<td>Rs. "+rs.getString(5)+"</td>"+"<td>Rs. "+rs.getString(6)+"</td>"+"<td>"+rs.getString(7)+"</td>"+"<td>"+rs.getString(8)+"</td>");
-							out.println("<td><button type='submit'>book</button></td>");
+							out.println("<td><button type='submit' id="+i+">book</button></td>");
 							out.print("</tr>");
 						}
 				else
