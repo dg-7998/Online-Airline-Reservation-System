@@ -1,5 +1,5 @@
 <%@ page import="java.io.*,java.util.*,java.sql.*"%>
-<%@ page import="javax.servlet.http.*,javax.servlet.*" %>
+<%@ page import="javax.servlet.http.*,javax.servlet.*,javax.servlet.RequestDispatcher" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
@@ -27,15 +27,19 @@
 		business=rs.getInt(4);
 	}
 	%>
-	<form action="bill.jsp" method=post>
+	<form  method=post action="bill.jsp">
 		No of Passengers for Business Class: <input type=text/ name=b_passengers><br>
 		No of Passengers for Economy Class: <input type=text/ name=e_passengers><br>
-		<button type="submit">Submit</button>		
+ 	<%
+		String b_passengers=request.getParameter("b_passengers");
+		String e_passengers=request.getParameter("e_passengers");  
+		session.setAttribute("b_price",b_price);
+		session.setAttribute("e_price",e_price);
+		session.setAttribute("economy",economy);
+		session.setAttribute("business",business);
+		session.setAttribute("i",i);
+	%> 		
+		<input type="submit" value="submit" name="submit">		
 	</form>
-	
-		
-		
-	
-	
 </body>
 </html>
