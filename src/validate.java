@@ -64,11 +64,11 @@ public class validate extends HttpServlet {
 				RequestDispatcher rd=request.getRequestDispatcher("Home.jsp");  
 				request.setAttribute("name",rs.getString(1));
 		        rd.forward(request, response); 
-			}
-			else{
-				out.println("<meta http-equiv='refresh' content='3;URL=login.html'>");//redirects after 3 seconds
-				out.println("<p style='color:red;'>Incorrect username or password!</p>");
-			}
+				}
+				else{
+					out.println("<meta http-equiv='refresh' content='3;URL=login.html'>");//redirects after 3 seconds
+					out.println("<p style='color:red;'>Incorrect username or password!</p>");
+				}
 			}
 			
 		}catch (Exception e) {

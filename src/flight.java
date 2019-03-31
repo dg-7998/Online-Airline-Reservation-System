@@ -42,25 +42,21 @@ public class flight extends HttpServlet {
 		String to1=request.getParameter("to");
 		String date1=request.getParameter("date");
 		PrintWriter out = response.getWriter();
-		//int flag=0;
-		//out.print(from1+" "+to1+" "+date1);
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			Connection con =   DriverManager.getConnection("jdbc:mysql://localhost:3306/airline","root","");
 			String query="select * from flight where from1 = '"+from1+"' and to1='"+to1+"' and date1='"+date1+"'";
 			Statement st = con.createStatement();
 			ResultSet rs = st.executeQuery(query);
-			int i=1;
 			out.print("<table border='1px solid' cellpadding='10'>");
-			out.print("<th>Id</th> <th>From</th> <th>To</th> <th>Date</th> <th>Business Class Fare</th> <th>Economy Class Fare</th> <th>Time</th> <th>Seat Availability</th> <th>Book</th>");
+			out.print("<th>Id</th> <th>From</th> <th>To</th> <th>Date</th> <th>Business Class Fare</th> <th>Economy Class Fare</th> <th>Time</th> <th>Economy Seat Availability</th> <th>Business Seat Availability</th> <th>Book</th>");
 			while(rs.next())
-			{
-				//System.out.println(rs.getString(1));				
+			{			
 				if((rs.getString(2).equals(from1))&&(rs.getString(3).equals(to1))&&(rs.getString(4).equals(date1)))
 						{	
 							out.print("<tr>");					
-							out.println("<td>"+rs.getString(1)+"</td>"+"<td>"+rs.getString(2)+"</td>"+"<td>"+rs.getString(3)+"</td>"+"<td>"+rs.getString(4)+"</td>"+"<td>Rs. "+rs.getString(5)+"</td>"+"<td>Rs. "+rs.getString(6)+"</td>"+"<td>"+rs.getString(7)+"</td>"+"<td>"+rs.getString(8)+"</td>");
-							out.println("<td><button type='submit' id="+i+">book</button></td>");
+							out.println("<td>"+rs.getString(1)+"</td>"+"<td>"+rs.getString(2)+"</td>"+"<td>"+rs.getString(3)+"</td>"+"<td>"+rs.getString(4)+"</td>"+"<td>Rs. "+rs.getString(5)+"</td>"+"<td>Rs. "+rs.getString(6)+"</td>"+"<td>"+rs.getString(7)+"</td>"+"<td>"+rs.getString(8)+"</td>"+"<td>"+rs.getString(9)+"</td>");
+							out.println("<td><button type='submit' name='"+rs.getString(1)+"' onclick=location.href='book.jsp?i="+rs.getString(1)+"'>book</button></td>");
 							out.print("</tr>");
 						}
 				else
@@ -68,14 +64,7 @@ public class flight extends HttpServlet {
 					out.println("wrong details");
 				}
 			}
-			out.print("</table>");
-			/*if(flag==1){
-				out.println("<input type='submit' value='book'>");
-				
-			}*/
-			/*else{
-				response.sendRedirect("Home.jsp");
-			}*/
+			out.print("</table><br>");
 		}
 		catch(Exception e)
 		{
